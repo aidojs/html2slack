@@ -1,0 +1,27 @@
+{
+  "name": "html2slack",
+  "version": "1.0.0",
+  "description": "A js library to convert a subset of HTML to JSON formatted Slack attachments",
+  "main": "src/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fast-html-parser": "^1.0.1",
+    "html-minifier": "^3.5.8",
+    "inline-elements": "^1.1.2",
+    "number-to-letter": "^1.0.1",
+    "pad": "^2.0.3",
+    "pad-left": "^2.1.0",
+    "promise-fs": "^1.3.0",
+    "romanize": "^1.1.1"
+  },
+  "devDependencies": {
+    "jest": "^22.0.4"
+  }
+}
