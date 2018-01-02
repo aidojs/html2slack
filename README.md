@@ -1,6 +1,3 @@
-# html2slack
-A js library to convert a subset of HTML to JSON formatted Slack attachments
-
 # HTML2Slack
 
 HTML2Slack is a Node.js library to convert a subset of HTML to JSON formatted Slack attachments. It uses [html-minifier](https://www.npmjs.com/package/html-minifier) and [fast-html-parser](https://www.npmjs.com/package/fast-html-parser) to generate a simple DOM tree from an HTML document, and renders this tree as a collection of Slack attachments.
