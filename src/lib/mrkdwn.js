@@ -91,17 +91,23 @@ const ol = (text, el) => {
     "i": idx => romanize(idx + 1).toLowerCase()
   }[type]
     
-  // We want to pad the prefixes so that the dots align :
+
+  // If we're in roman type we want to pad the prefixes so that the dots align :
   //   I. Item one
   //  II. Item two
   // III. Item three
   const lis = el.querySelectorAll("li")
-  const len = lis.length
-  // To do that we fetch the length of the longest prefix in the collection
-  const maxWidth = Math.max(...lis.map((li, idx) => prefixer(idx).length))
-
-  // Return the lis, prefixed and padded
-  return lis.map((li, idx) => `\`${pad(maxWidth, prefixer(idx))}.\` ${li.text}`).join("\n")
+  if (type === "I" || type === "i") {
+    const len = lis.length
+    // To do that we fetch the length of the longest prefix in the collection
+    const maxWidth = Math.max(...lis.map((li, idx) => prefixer(idx).length))
+  
+    // Return the lis, prefixed and padded
+    return lis.map((li, idx) => `\`${pad(maxWidth, prefixer(idx))}.\` ${li.text}`).join("\n")
+  } else {
+    // Else just prefix the lis
+    return lis.map((li, idx) => `${prefixer(idx)}. ${li.text}`).join("\n")
+  }
 }
 
 /**
@@ -145,20 +151,21 @@ const table = (text, el) => {
   }
 
   // Table theme
-  // const rowPrefix = "[ "
-  // const rowSuffix = " ]"
-  // const columnSeparator = " | "
-  // const linePrefix = "[-"
-  // const lineSuffix = "-]"
-  // const linePad = "-"
-  // const lineSeparator = "-|-"
-  const rowPrefix = "║ "
-  const rowSuffix = " ║"
-  const columnSeparator = " ┃ "
-  const linePrefix = "╟─"
-  const lineSuffix = "─╢"
-  const linePad = "─"
-  const lineSeparator = "─╂─"
+  const rowPrefix = "| "
+  const rowSuffix = " |"
+  const columnSeparator = " | "
+  const linePrefix = "|-"
+  const lineSuffix = "-|"
+  const linePad = "-"
+  const lineSeparator = "-|-"
+  // Unicode theme
+  // const rowPrefix = "║ "
+  // const rowSuffix = " ║"
+  // const columnSeparator = " ┃ "
+  // const linePrefix = "╟─"
+  // const lineSuffix = "─╢"
+  // const linePad = "─"
+  // const lineSeparator = "─╂─"
 
   const formatCell = (cell, idx) => align[cell.attributes.align](cell.childNodes[0].text, columnWidths[idx])
   const formatLine = line => {

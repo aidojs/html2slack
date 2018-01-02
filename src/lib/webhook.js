@@ -1,7 +1,7 @@
 
 const request = require("request-promise-native")
 
-const defaultWebhook = 'xxxx'
+const defaultWebhook = 'xxxxx'
 
 const options = {
   method: "POST",
