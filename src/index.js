@@ -4,7 +4,7 @@ const parse = require("./lib/parse")
 const mrkdwn = require("./lib/mrkdwn")
 const {
   postMessage
-} = require("../../utils/webhook")
+} = require("./lib/webhook")
 
 ;(async () => {
   const example = process.argv[2]

@@ -1,7 +1,7 @@
 
 const request = require("request-promise-native")
 
-const defaultWebhook = 'xxxx'
+const defaultWebhook = 'https://hooks.slack.com/services/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'
 
 const options = {
   method: "POST",
