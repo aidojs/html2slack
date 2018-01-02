@@ -5,7 +5,7 @@ A js library to convert a subset of HTML to JSON formatted Slack attachments
 
 HTML2Slack is a Node.js library to convert a subset of HTML to JSON formatted Slack attachments. It uses [html-minifier](https://www.npmjs.com/package/html-minifier) and [fast-html-parser](https://www.npmjs.com/package/fast-html-parser) to generate a simple DOM tree from an HTML document, and renders this tree as a collection of Slack attachments.
 
-These attachments can be sent to the Slack API through an incoming webhook, or a Slack application.
+This allows you to use all existing HTML tooling (templating, previewing, etc...) in your slack bot development worklow, in an effort to make slack bots code more like regular old web applications.
 
 ## Basic usage
 
@@ -188,6 +188,35 @@ Basic formatting is available through the `align` attribute (possible values are
 |--------------|----------------------|----------------------------|
 |    It's also | cool to align on the |                      right |
 ```
+
+## Styling attachments
+
+All the attachment parameters from the [Slack documentation](https://api.slack.com/docs/message-attachments#attachment_parameters) can be used with HTML2Slack. You should add them as attribute to the section tag. When the parameter has an underscore in its name `_` you need to replace it with a dash `-` to conform with HTML conventions.
+
+```html
+<body>
+  <section 
+    color="warning"
+    pretext="This attachment is brought to you by html2slack"
+    author-name="Bob Dobbs"
+    author-link="http://www.subgenius.com/"
+    author-icon="http://www.subgenius.com/favicon.ico"
+    title="The many lives of Bob Dobbs"
+    title-link="http://www.subgenius.com/bigfist/answers/faqs/X0007_ARE_YOU_REALLY_A_SUB.html"
+    thumb-url="https://i.imgur.com/a5m4lYE.gif"
+    footer="HTML 2 Slack converter"
+    footer-icon="https://a.wattpad.com/useravatar/TheJGibbs1.128.967232.jpg"
+  >
+    <header><b>J. R. "Bob" Dobbs</b> is the figurehead of the <a href="https://en.wikipedia.org/wiki/Church_of_the_SubGenius">Church of the SubGenius</a>.</header>
+    <main>
+        His image is derived from a piece of <i>1950s clip art</i>. According to SubGenius dogma, "Bob" was a drilling equipment salesman who, in 1953, saw a vision of <strike>God</strike> (<a href="https://en.wikipedia.org/wiki/Jehovah_1">JHVH-1</a> according to Church scriptures) on a television set he had built himself. The vision inspired him to write the "PreScriptures" (as described in the Book of the SubGenius) and found the Church.
+    </main>
+  </section>
+</body>
+```
+Will render to this :
+
+![](examples/doc/section-style.png)
 
 ## Parsing rules
 
