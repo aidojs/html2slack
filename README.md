@@ -226,5 +226,4 @@ Block-level elements such as `<p>` or `<div>` are separated by line breaks. When
 ```
 will render as :
 
-
 ![](examples/doc/block-inline.png)

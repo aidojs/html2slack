@@ -193,9 +193,9 @@ c. Item 3`
   <li>Item 3</li>
 </ol>`,
       expectedOutput:
-`  I. Item 1
- II. Item 2
-III. Item 3`
+`\`  I.\` Item 1
+\` II.\` Item 2
+\`III.\` Item 3`
     }, {
       input:
 `<ol type="i">
@@ -204,9 +204,9 @@ III. Item 3`
   <li>Item 3</li>
 </ol>`,
       expectedOutput:
-`  i. Item 1
- ii. Item 2
-iii. Item 3`
+`\`  i.\` Item 1
+\` ii.\` Item 2
+\`iii.\` Item 3`
     }]
 
     expect(
