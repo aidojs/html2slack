@@ -11,6 +11,10 @@ const mrkdwn = require("./mrkdwn")
 function fields(node) {
   const list = node.querySelector("dl")
 
+  if (!list) {
+    return {}
+  }
+
   const titles = list.querySelectorAll("dt").map(title => title.rawText)
   const values = list.querySelectorAll("dd").map(value => mrkdwn(value))
   const short = list.querySelectorAll("dd").map(value => value.classNames.indexOf("short") !== -1)
