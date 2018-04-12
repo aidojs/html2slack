@@ -1,15 +1,22 @@
 {
   "name": "html2slack",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A js library to convert a subset of HTML to JSON formatted Slack attachments",
-  "main": "src/index.js",
+  "main": "src/lib",
   "directories": {
     "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hellocomet/html2slack.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hellocomet/html2slack/issues"
   },
   "scripts": {
     "test": "jest --coverage"
   },
-  "author": "",
+  "author": "Damien BUTY",
   "license": "ISC",
   "dependencies": {
     "fast-html-parser": "^1.0.1",
@@ -22,6 +29,9 @@
     "romanize": "^1.1.1"
   },
   "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.11.0",
     "jest": "^22.0.4"
   }
 }
