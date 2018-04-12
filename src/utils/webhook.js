@@ -1,7 +1,11 @@
 
 const request = require("request-promise-native")
 
-const defaultWebhook = 'xxxxx'
+/**
+ * Helpers to post examples on existing incoming webhooks
+ * The webhook first needs to be setup on Slack (https://my.slack.com/services/new/incoming-webhook/)
+ */
+const defaultWebhook = process.env["SLACK_WEBHOOK"]
 
 const options = {
   method: "POST",
@@ -14,7 +18,7 @@ function postText(message, webhook = defaultWebhook) {
     uri: webhook,
     body: { text: message }
   })
-  .catch(e => { console.error(e) })
+    .catch(e => { console.error(e) })
 }
 
 function postMessage(message, webhook = defaultWebhook) {
@@ -23,7 +27,7 @@ function postMessage(message, webhook = defaultWebhook) {
     uri: webhook,
     body: message
   })
-  .catch(e => { console.error(e) })
+    .catch(e => { console.error(e) })
 }
 
 module.exports = {

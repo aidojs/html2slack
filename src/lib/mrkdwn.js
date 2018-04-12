@@ -1,7 +1,10 @@
 
 // We use inline-elements which is fetched directly from the html spec
 // but patch it with strike which is deprecated in HTML5
-const pad = require('pad')
+const pad = require("pad")
+const romanize = require("romanize")
+const ntol = require("number-to-letter")
+
 const inlineElements = [
   ...require("inline-elements"),
   "strike"
@@ -72,9 +75,6 @@ const ul = (text, el) => el.querySelectorAll("li").map(li => `• ${li.text}`).j
  * 2. Item 2
  */
 const ol = (text, el) => {
-  const romanize = require('romanize')
-  const ntol = require('number-to-letter')
-
   // Depending on the type attribute, we may prefix each li with
   // - 1: a number
   // - A: an uppercase letter
@@ -92,13 +92,12 @@ const ol = (text, el) => {
   }[type]
     
 
-  // If we're in roman type we want to pad the prefixes so that the dots align :
+  // If we"re in roman type we want to pad the prefixes so that the dots align :
   //   I. Item one
   //  II. Item two
   // III. Item three
   const lis = el.querySelectorAll("li")
   if (type === "I" || type === "i") {
-    const len = lis.length
     // To do that we fetch the length of the longest prefix in the collection
     const maxWidth = Math.max(...lis.map((li, idx) => prefixer(idx).length))
   
@@ -117,7 +116,7 @@ const ol = (text, el) => {
  * [--------------|----------------------|----------------------------]
  * [     But      | some is              | absurdly and stupidly long ]
  * [--------------|----------------------|----------------------------]
- * [    It's also | cool to align on the |                      right ]
+ * [    It"s also | cool to align on the |                      right ]
  */
 const table = (text, el) => {
   const lines = el.querySelectorAll("tr")
@@ -234,7 +233,7 @@ const mrkdwn = node => {
       // If the children are all text nodes or inline elements we simply concatenate them
       // Otherwise we join them with new lines
       const inlineChildren = childNodes.filter(
-        child => child.constructor.name === 'TextNode' || inlineElements.indexOf(child.tagName) !== -1
+        child => child.constructor.name === "TextNode" || inlineElements.indexOf(child.tagName) !== -1
       )
       const separator = inlineChildren.length === childNodes.length
         ? ""
