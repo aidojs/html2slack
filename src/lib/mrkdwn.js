@@ -221,10 +221,26 @@ const escapeText = text => text
  */
 const mrkdwn = node => {
   const { constructor } = node
+
+  // Return an empty string for unsupported node types
+  if (constructor.name !== "String" && constructor.name !== "HTMLElement" && constructor.name !== "TextNode") {
+    return ""
+  }
+
+  // Ignore <dl> nodes (they are handled by the fields)
+  if (constructor.name === "HTMLElement" && node.tagName === "dl") {
+    return ""
+  }
+
+  // Return the escaped text for String & TextNode
   if (constructor.name === "String") {
     return escapeText(node)
   }
+  if (constructor.name === "TextNode") {
+    return escapeText(node.text)
+  }
   
+  // Recursively convert html elements
   if (constructor.name === "HTMLElement") {
     const { tagName, childNodes } = node
     // Recursively convert all children nodes of unsupported tags
@@ -253,12 +269,7 @@ const mrkdwn = node => {
       : text
   }
 
-  if (constructor.name === "TextNode") {
-    return escapeText(node.text)
-  }
 
-  // Return an empty string for unsupported data types
-  return ""
 }
 
 module.exports = mrkdwn
