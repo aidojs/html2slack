@@ -92,7 +92,7 @@ const ol = (text, el) => {
   }[type]
     
 
-  // If we"re in roman type we want to pad the prefixes so that the dots align :
+  // If we're in roman type we want to pad the prefixes so that the dots align :
   //   I. Item one
   //  II. Item two
   // III. Item three
@@ -116,7 +116,7 @@ const ol = (text, el) => {
  * [--------------|----------------------|----------------------------]
  * [     But      | some is              | absurdly and stupidly long ]
  * [--------------|----------------------|----------------------------]
- * [    It"s also | cool to align on the |                      right ]
+ * [    It's also | cool to align on the |                      right ]
  */
 const table = (text, el) => {
   const lines = el.querySelectorAll("tr")
