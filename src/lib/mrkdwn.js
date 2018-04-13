@@ -213,6 +213,11 @@ const escapeText = text => text
   .replace(/>/g, "&gt;")
   .replace(/&/g, "&amp;")
 
+// These tags are ignored because they are handled as special Slack attachments
+const ignoredTags = [
+  "dl",
+  "button"
+]
 /**
  * Walk through the sub-nodes of an HTML element and translates them as one mrkdwn string
  * with control characters escaped
@@ -228,7 +233,7 @@ const mrkdwn = node => {
   }
 
   // Ignore <dl> nodes (they are handled by the fields)
-  if (constructor.name === "HTMLElement" && node.tagName === "dl") {
+  if (constructor.name === "HTMLElement" && ignoredTags.includes(node.tagName)) {
     return ""
   }
 
@@ -249,7 +254,7 @@ const mrkdwn = node => {
       // If the children are all text nodes or inline elements we simply concatenate them
       // Otherwise we join them with new lines
       const inlineChildren = childNodes.filter(
-        child => child.constructor.name === "TextNode" || inlineElements.indexOf(child.tagName) !== -1
+        child => child.constructor.name === "TextNode" || inlineElements.includes(child.tagName)
       )
       const separator = inlineChildren.length === childNodes.length
         ? ""

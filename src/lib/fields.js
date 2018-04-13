@@ -17,7 +17,7 @@ function fields(node) {
 
   const titles = list.querySelectorAll("dt").map(title => title.rawText)
   const values = list.querySelectorAll("dd").map(value => mrkdwn(value))
-  const short = list.querySelectorAll("dd").map(value => value.classNames.indexOf("short") !== -1)
+  const short = list.querySelectorAll("dd").map(value => value.classNames.includes("short"))
 
   const fields = titles.map((title, index) => ({
     title,
