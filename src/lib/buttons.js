@@ -9,9 +9,7 @@ function buttons(node) {
     return {}
   }
 
-  console.log(list.map(button => console.log(button.classNames)))
-
-  // Returns one of the three recognized button styles or empty object
+  // Returns one of the three recognized button styles or an empty object
   const getStyle = classes => {
     if (classes.includes("primary")) { return { style: "primary" } }
     if (classes.includes("danger")) { return { style: "danger" } }
