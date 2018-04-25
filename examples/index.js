@@ -25,5 +25,7 @@ const {
   console.log("# Slack conversion")
   console.log(JSON.stringify(slack, null, 2))
   
-  postMessage(slack)
+  if (process.env["SLACK_WEBHOOK"]) {
+    postMessage(slack)
+  }
 })().catch(e => { console.error(e) })

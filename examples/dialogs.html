@@ -1,0 +1,42 @@
+<body class="modal">
+  <form callback-id="test">
+    <header>A fine form for fun</header>
+    <label>
+      This is just a text field with a pre-filled value
+      <input type="text" name="test-field" value="Hi Slack!"/>
+    </label>
+    <label>
+      This is a URL field
+      <input type="url" name="test-url" placeholder="https://app.hellocomet.co" hint="Insert here your favorite website"/>
+    </label>
+    <label>
+      Now let's count with Elvis
+      <select name="select-simple" placeholder="Select one from many">
+        <option value="1">For the money</option>
+        <option value="2">For the show</option>
+      </select>
+    </label>
+    <label>
+      Again, but with groups
+      <select name="select-groups" placeholder="This one is better">
+        <optgroup label="1, 2, 3">
+          <option value="money">For the money</option>
+          <option value="show">For the show</option>
+          <option value="ready">To get ready</option>
+        </optgroup>
+        <optgroup label="Now">
+          <option value="gogogo">Go, cat, go !</option>
+        </optgroup>
+        <optgroup label="But">
+          <option value="blue">No stepping on my blue suede shoes</option>
+          <option value="blue">Srsly</option>
+        </optgroup>
+      </select>
+    </label>
+    <label>
+      A textarea to finish
+      <textarea min-length="5" max-length="10"></textarea>
+    </label>
+    <input type="submit" value="Send It !"/>
+  </form>
+</body>
