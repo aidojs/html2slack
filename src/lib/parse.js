@@ -1,10 +1,7 @@
 const HTMLParser = require("fast-html-parser")
-const { minify } = require("html-minifier")
 
 const parse = html => HTMLParser.parse(
-  minify(html, {
-    collapseWhitespace: true
-  }), {
+  html, {
     lowerCaseTagName: true,
     style: true,
     pre: true

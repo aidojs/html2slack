@@ -208,11 +208,6 @@ const rules = {
   table
 }
 
-const escapeText = text => text
-  .replace(/</g, "&lt;")
-  .replace(/>/g, "&gt;")
-  .replace(/&/g, "&amp;")
-
 // These tags are ignored because they are handled as special Slack attachments
 const ignoredTags = [
   "dl",
@@ -224,7 +219,7 @@ const ignoredTags = [
  * @param  {HTMLElement|String|TextNode} node
  * @return {String}
  */
-const mrkdwn = node => {
+const mrkdwn = (node) => {
   const { constructor } = node
 
   // Return an empty string for unsupported node types
@@ -239,10 +234,10 @@ const mrkdwn = node => {
 
   // Return the escaped text for String & TextNode
   if (constructor.name === "String") {
-    return escapeText(node)
+    return node
   }
   if (constructor.name === "TextNode") {
-    return escapeText(node.text)
+    return node.text
   }
   
   // Recursively convert html elements
@@ -263,14 +258,12 @@ const mrkdwn = node => {
       return childNodes.map(node => mrkdwn(node)).join(separator)
     }
 
-    // Escape <, > and &
-    // as per https://api.slack.com/docs/message-formatting#3_characters_you_must_encode_as_html_entities
-    const text = escapeText(node.text)
+    const { text } = node
   
     // Apply the rules for each supported tag.
     // For unsupported tags, just return the parsed text
     return rules[tagName]
-      ? `${rules[tagName](text, node)}`
+      ? rules[tagName](text, node)
       : text
   }
 
