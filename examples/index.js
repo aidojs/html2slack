@@ -1,5 +1,7 @@
 
-const { readFile } = require("promise-fs")
+const { promisify } = require("util")
+const fs = require("fs")
+const readFile = promisify(fs.readFile)
 const html2slack = require("../src/lib")
 
 const {
