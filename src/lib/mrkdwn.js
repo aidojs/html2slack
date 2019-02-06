@@ -14,13 +14,11 @@ const inlineElements = [
  * Bold : *bold*
  */
 const strong = text => `*${text}*`
-const b = strong
 
 /**
  * Italic : _italic_
  */
 const em = text => `_${text}_`
-const i = em
 
 /**
  * Strikethrough : ~strikethrough~
@@ -40,6 +38,18 @@ const q = text => `>${text}`
  * As long as it is sent in one go
  */
 const textarea = text => `>>>${text}`
+
+/**
+ * Blockquote work a little differently : they will wrap each line in a single quote
+ * so that you can exit the quote :
+ * > This will be in the quote
+ * > As will this
+ * But not this
+ */
+const blockquote = text => text.trim()
+  .split("\n")
+  .map(line => `>${line}`)
+  .join("\n")
 
 /**
  * Code (inline) : `some code`
@@ -193,13 +203,20 @@ const table = (text, el) => {
 // These are the rules to replace common html tags with their mrkdwn equivalent
 // as per https://get.slack.help/hc/en-us/articles/202288908-Format-your-messages
 const rules = {
-  b,
   strong,
-  i,
+  b: strong,
+  h1: strong,
+  h2: strong,
+  h3: strong,
+  h4: strong,
+  h5: strong,
+  h6: strong,
   em,
+  i: em,
   strike,
   q,
   textarea,
+  blockquote,
   code,
   pre,
   a,
