@@ -62,4 +62,17 @@ describe("HTML description lists to Slack fields converter", () => {
       }],
     })
   })
+
+  it("should only convert the first list in the HTML", () => {
+    const input = parse(`
+      <dl>
+        <dt>Title 1</dt>
+        <dd class="short">Some list element</dd>
+      </dl>
+      <dl>
+        <dt>Title 2</dt>
+        <dd class="short">Another element in another list</dd>
+      </dl>`)
+    expect(fields(input).fields.length).toBe(1)
+  })
 })

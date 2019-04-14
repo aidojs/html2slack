@@ -63,13 +63,15 @@ function modal(form) {
     if (textarea) {
       const { attributes } = textarea
       return {
-        type: "textarea",
         label: labelTextNode.text.substring(0, 24),
-        subtype: attributes.type,
+        ...attributes.type && { subtype: attributes.type },
         optional: !attributes.required,
         ...dashAttributes(textarea),
+        type: "textarea",
       }
     }
+    console.log(1)
+    return null
   })
 
   return {
@@ -77,7 +79,7 @@ function modal(form) {
     callback_id: action,
     state: action,
     submit_label: submitLabel,
-    elements,
+    elements: elements.filter(Boolean),
   }
 }
 

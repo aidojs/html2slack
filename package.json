@@ -14,7 +14,8 @@
     "url": "https://github.com/aidojs/html2slack/issues"
   },
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "lint": "eslint --ignore-path .gitignore ./"
   },
   "engines": {
     "node": ">=8.0.0"
@@ -25,6 +26,7 @@
     "fast-html-parser": "^1.0.1",
     "inline-elements": "^1.1.2",
     "number-to-letter": "^1.0.1",
+    "nyc": "^13.3.0",
     "pad": "^2.1.0",
     "pad-left": "^2.1.0",
     "romanize": "^1.1.1"
