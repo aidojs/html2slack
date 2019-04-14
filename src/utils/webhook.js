@@ -9,14 +9,14 @@ const defaultWebhook = process.env["SLACK_WEBHOOK"]
 
 const options = {
   method: "POST",
-  json: true
+  json: true,
 }
 
 function postText(message, webhook = defaultWebhook) {
   return request({
     ...options,
     uri: webhook,
-    body: { text: message }
+    body: { text: message },
   })
     .catch(e => { console.error(e) })
 }
@@ -25,12 +25,12 @@ function postMessage(message, webhook = defaultWebhook) {
   return request({
     ...options,
     uri: webhook,
-    body: message
+    body: message,
   })
     .catch(e => { console.error(e) })
 }
 
 module.exports = {
   postText,
-  postMessage
+  postMessage,
 }

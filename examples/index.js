@@ -5,7 +5,7 @@ const readFile = promisify(fs.readFile)
 const html2slack = require("../src/lib")
 
 const {
-  postMessage
+  postMessage,
 } = require("../src/utils/webhook")
 
 /**

@@ -33,6 +33,6 @@
             "error",
             "always-multiline"
         ],
-        "no-console": "warn"
+        "no-console": "off"
     }
 }

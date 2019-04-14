@@ -4,7 +4,7 @@ const parse = html => HTMLParser.parse(
   html, {
     lowerCaseTagName: true,
     style: true,
-    pre: true
+    pre: true,
   }
 )
 
