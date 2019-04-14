@@ -5,7 +5,7 @@ const dashAttributes = require("./attributes")
  * @param {HTMLElement} form 
  */
 function modal(form) {
-  const callbackId = form.attributes["callback-id"]
+  const action = form.attributes["action"]
   const [submitButton] = form.querySelectorAll("input").filter(({ attributes }) => attributes.type === "submit")
   const header = form.querySelector("header")
   const labels = form.querySelectorAll("label")
@@ -17,16 +17,16 @@ function modal(form) {
     const textInput = label.querySelector("input")
     const select = label.querySelector("select")
     const textarea = label.querySelector("textarea")
-    const labelTextNode = label.childNodes.find(child => child.constructor.name === 'TextNode')
+    const labelTextNode = label.childNodes.find(child => child.constructor.name === "TextNode")
 
     if (textInput) {
       const { attributes } = textInput
       return {
         type: "text",
         label: labelTextNode.text.substring(0, 24),
-        subtype: attributes.type,
+        ...attributes.type !== "text" && { subtype: attributes.type },
         optional: !attributes.required,
-        ...dashAttributes(textInput)
+        ...dashAttributes(textInput),
       }
     }
 
@@ -40,7 +40,7 @@ function modal(form) {
         type: "select",
         label: labelTextNode.text.substring(0, 24),
         optional: !attributes.required,
-        ...dashAttributes(select)
+        ...dashAttributes(select),
       }
       if (selected) { base.value = selected.attributes.value}
 
@@ -49,13 +49,13 @@ function modal(form) {
           ...base,
           option_groups: optgroups.map(optgroup => ({
             label: optgroup.attributes.label,
-            options: optgroup.querySelectorAll("option").map(option => ({ value: option.attributes.value, label: option.text }))
-          }))
+            options: optgroup.querySelectorAll("option").map(option => ({ value: option.attributes.value, label: option.text })),
+          })),
         }
       } else {
         return {
           ...base,
-          options: options.map(option => ({ value: option.attributes.value, label: option.rawText }))
+          options: options.map(option => ({ value: option.attributes.value, label: option.rawText })),
         }
       }
     }
@@ -67,16 +67,17 @@ function modal(form) {
         label: labelTextNode.text.substring(0, 24),
         subtype: attributes.type,
         optional: !attributes.required,
-        ...dashAttributes(textarea)
+        ...dashAttributes(textarea),
       }
     }
   })
 
   return {
     title,
-    callback_id: callbackId,
+    callback_id: action,
+    state: action,
     submit_label: submitLabel,
-    elements
+    elements,
   }
 }
 

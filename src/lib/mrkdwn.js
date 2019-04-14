@@ -7,7 +7,7 @@ const ntol = require("number-to-letter")
 
 const inlineElements = [
   ...require("inline-elements"),
-  "strike"
+  "strike",
 ]
 
 /**
@@ -92,13 +92,12 @@ const ol = (text, el) => {
   // - I: an uppercase roman numeral
   // - i: a lowercase roman numeral
   const type = el.attributes.type || "1"
-
   const prefixer = {
     "1": idx => (idx + 1).toString(),
     "A": idx => ntol(idx),
     "a": idx => ntol(idx).toLowerCase(),
     "I": idx => romanize(idx + 1),
-    "i": idx => romanize(idx + 1).toLowerCase()
+    "i": idx => romanize(idx + 1).toLowerCase(),
   }[type]
     
 
@@ -156,7 +155,7 @@ const table = (text, el) => {
       const suffix = " ".repeat(Math.ceil(half))
 
       return `${prefix}${text}${suffix}`
-    }
+    },
   }
 
   // Table theme
@@ -184,8 +183,8 @@ const table = (text, el) => {
         ...cell,
         attributes: {
           align: "left",
-          ...cell.attributes
-        }
+          ...cell.attributes,
+        },
       })
     )
 
@@ -222,13 +221,13 @@ const rules = {
   a,
   ul,
   ol,
-  table
+  table,
 }
 
 // These tags are ignored because they are handled as special Slack attachments
 const ignoredTags = [
   "dl",
-  "button"
+  "button",
 ]
 /**
  * Walk through the sub-nodes of an HTML element and translates them as one mrkdwn string
@@ -239,16 +238,6 @@ const ignoredTags = [
 const mrkdwn = (node) => {
   const { constructor } = node
 
-  // Return an empty string for unsupported node types
-  if (constructor.name !== "String" && constructor.name !== "HTMLElement" && constructor.name !== "TextNode") {
-    return ""
-  }
-
-  // Ignore <dl> nodes (they are handled by the fields)
-  if (constructor.name === "HTMLElement" && ignoredTags.includes(node.tagName)) {
-    return ""
-  }
-
   // Return the escaped text for String & TextNode
   if (constructor.name === "String") {
     return node
@@ -258,7 +247,7 @@ const mrkdwn = (node) => {
   }
   
   // Recursively convert html elements
-  if (constructor.name === "HTMLElement") {
+  if (constructor.name === "HTMLElement" && !ignoredTags.includes(node.tagName)) {
     const { tagName, childNodes } = node
     // Recursively convert all children nodes of unsupported tags
     if (!rules[tagName] && childNodes.length) {
@@ -284,7 +273,8 @@ const mrkdwn = (node) => {
       : text
   }
 
-
+  // If the node is of unsupported or ignored type just return an empty string
+  return ""
 }
 
 module.exports = mrkdwn

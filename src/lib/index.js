@@ -21,7 +21,7 @@ module.exports = html => {
       ...fields(section),
       ...buttons(section),
       text: mrkdwn(section),
-      mrkdwn_in: ["text", "pretext", "fields"]
+      mrkdwn_in: ["text", "pretext", "fields"],
     }))
 
     return { attachments }

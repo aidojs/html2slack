@@ -5,7 +5,7 @@
 function buttons(node) {
   const list = node.querySelectorAll("button")
 
-  if (!list) {
+  if (!list.length) {
     return {}
   }
 
@@ -20,9 +20,9 @@ function buttons(node) {
   const actions = list.map(({ rawText, attributes, classNames }) => ({
     text: rawText,
     name: attributes.name,
-    value: attributes.name,
+    value: attributes.value || attributes.name,
     type: "button",
-    ...getStyle(classNames)
+    ...getStyle(classNames),
   }))
 
   return { actions }

@@ -1,3 +1,5 @@
+const mrkdwn = require("./mrkdwn")
+
 /**
  * Converts <dl> lists into an array of slack fields with a title & a value
  * Will only convert the first <dl> it finds
@@ -14,14 +16,24 @@ function fields(node) {
     return {}
   }
 
-  const titles = list.querySelectorAll("dt").map(title => title.rawText)
-  const values = list.querySelectorAll("dd").map(value => value.text)
+  const titles = list.querySelectorAll("dt").map(title => {
+    title.tagName = "span"
+    return title
+  })
   const short = list.querySelectorAll("dd").map(value => value.classNames.includes("short"))
+  const values = list.querySelectorAll("dd").map(value => {
+    value.tagName = "span"
+    return value
+  })
+
+  if (!titles.length) {
+    return {}
+  }
 
   const fields = titles.map((title, index) => ({
-    title,
-    value: values[index],
-    short: short[index]
+    title: mrkdwn(title),
+    value: mrkdwn(values[index]),
+    short: short[index],
   }))
 
   return { fields }

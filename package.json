@@ -8,10 +8,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hellocomet/html2slack.git"
+    "url": "git+https://github.com/aidojs/html2slack.git"
   },
   "bugs": {
-    "url": "https://github.com/hellocomet/html2slack/issues"
+    "url": "https://github.com/aidojs/html2slack/issues"
   },
   "scripts": {
     "test": "jest --coverage"
