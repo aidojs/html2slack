@@ -1,6 +1,6 @@
 {
   "name": "html2slack",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "A js library to convert a subset of HTML to JSON formatted Slack attachments",
   "main": "src/lib",
   "directories": {
