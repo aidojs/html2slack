@@ -70,7 +70,6 @@ function modal(form) {
         type: "textarea",
       }
     }
-    console.log(1)
     return null
   })
 

@@ -18,8 +18,6 @@ describe("HTML buttons to Slack actions converter", () => {
     expect(actions.length).toBe(3)
     expect(actions[0]).toEqual({
       text: "Bar Baz",
-      name: undefined,
-      value: undefined,
       type: "button",
     })
     expect(actions[1]).toEqual({
@@ -32,6 +30,19 @@ describe("HTML buttons to Slack actions converter", () => {
       text: "Five Schmekels",
       name: "glop",
       value: "glap",
+      type: "button",
+    })
+  })
+
+  it("should convert buttons with href attribute to Slack link buttons", () => {
+    const url = "https://comet.co"
+    const html = `<button href="${url}">Foo</button>`
+    const input = parse(html)
+    const { actions } = buttons(input)
+    expect(actions.length).toBe(1)
+    expect(actions[0]).toEqual({
+      text: "Foo",
+      url,
       type: "button",
     })
   })
