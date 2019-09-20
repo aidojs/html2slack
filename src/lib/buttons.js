@@ -20,6 +20,7 @@ function buttons(node) {
   const actions = list.map(({ rawText, attributes, classNames }) => ({
     text: rawText,
     name: attributes.name,
+    ...attributes.confirm && { confirm: JSON.parse(attributes.confirm) },
     ...(attributes.value || attributes.name) && { value: attributes.value || attributes.name },
     ...attributes.href && { url: attributes.href },
     type: "button",
